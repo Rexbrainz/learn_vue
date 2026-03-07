@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning-Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ greet().toUpperCase() }}</h1>
+        <p>Lucky Number: {{ luckyNumber }}</p>
+
+        <p>{{ employee.name }} is {{ employee.age }} years old.</p>
+        <p>His salary is {{ employee.salary }}</p>
+        <p>{{ updateLuckyNumber() }}</p>
+    </div>
+</body>
+<script>
+    const { createApp, ref, reactive } = Vue;
+
+    createApp({
+        setup() {
+            let luckyNumber = ref(6);
+            const employee = reactive ({
+                name:   "John",
+                age:    30,
+                salary: 50000,
+            });
+
+            function updateLuckyNumber() {
+                setTimeout(() => {
+                    luckyNumber.value = 77;
+                    employee.salary = 60000;
+                }, 2000)
+            }
+            function greet() {
+                //const message = "Hello Vue3!";
+                return "Hello Vue3!";
+            }
+            
+            return {
+                greet,
+                luckyNumber,
+                employee,
+                updateLuckyNumber,
+            };
+        },
+    }).mount("#app");
+</script>
+</html>
