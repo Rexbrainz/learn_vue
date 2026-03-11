@@ -1,12 +1,24 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createApp, type ComponentOptions } from 'vue'
 
-import App from './App.vue'
-import router from './router'
+type Data = {
+    counter: number;
+}
+
+const App = {
+    template: "<div> Counter: {{ counter }} </div>",
+    data(): Data {
+        return { counter: 0 }
+    },
+    created() {
+        const interval = setInterval(() => {
+            (this as ComponentOptions<Data>).counter++
+        }, 1000);
+        
+        setTimeout(() => {
+            clearInterval(interval)
+        }, 5000)
+    }
+};
 
 const app = createApp(App)
-
-app.use(createPinia())
-app.use(router)
-
 app.mount('#app')

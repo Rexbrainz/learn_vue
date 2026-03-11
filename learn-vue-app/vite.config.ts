@@ -14,6 +14,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      // Allow runtime template strings (book examples) by bundling the compiler-enabled build.
+      vue: 'vue/dist/vue.esm-bundler.js',
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
